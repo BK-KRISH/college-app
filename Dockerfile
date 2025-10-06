@@ -9,7 +9,7 @@ COPY backend/package*.json ./
 RUN npm install --production
 
 # Copy server and frontend files
-COPY backend/. .
+COPY backend/ . 
 
 EXPOSE 3000
 
