@@ -1,0 +1,31 @@
+# docker-compose.yml
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: college_db
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: devpass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: dev
+      DB_PASSWORD: devpass
+      DB_NAME: college_db
+      PORT: 3000
+    ports:
+      - "8082:3000"
+    restart: unless-stopped
+
+volumes:
+  db_data:

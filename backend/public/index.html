@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>College Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-box">
+    <h2>College Login</h2>
+    <label>Username</label><br>
+    <input id="username" /><br>
+    <label>Password</label><br>
+    <input id="password" type="password" /><br>
+    <button onclick="doLogin()">Login</button>
+  </div>
+
+  <script>
+    function doLogin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      // Simple frontend validation
+      if(user === 'admin' && pass === '12345') {
+        alert('Login successful!');
+        // Store user info and redirect
+        sessionStorage.setItem('user', JSON.stringify({username: 'admin', role: 'admin'}));
+        window.location.href = './dashboard.html';
+      } else {
+        alert('Invalid username or password');
+      }
+    }
+  </script>
+</body>
+</html>
