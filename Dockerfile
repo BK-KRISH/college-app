@@ -1,17 +1,17 @@
-# Use Node.js base image
+# Use an official Node.js runtime as the base image
 FROM node:18-alpine
 
-# Set working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy only the backend's package files
-COPY backend/package*.json ./
+# Copy package.json and package-lock.json (if present)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install --omit=dev
 
-# Copy the backend code
-COPY backend/ .
+# Copy the rest of the app files
+COPY . .
 
 # Expose the app port
 EXPOSE 3000
