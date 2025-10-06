@@ -15,9 +15,7 @@ services:
       - "3306:3306"
 
   app:
-    build:
-      context: ./backend        # 👈 points to your app code folder
-      dockerfile: ../Dockerfile # 👈 use the Dockerfile in project root
+    build: .
     depends_on:
       - db
     environment:
