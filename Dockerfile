@@ -1,16 +1,20 @@
-# Dockerfile (in root folder)
+# Use Node.js base image
 FROM node:18-alpine
 
+# Set working directory
 WORKDIR /app
 
-# Copy only backend files
+# Copy only the backend's package files
 COPY backend/package*.json ./
 
-RUN npm install --production
+# Install dependencies
+RUN npm install --omit=dev
 
-# Copy server and frontend files
-COPY backend/ . 
+# Copy the backend code
+COPY backend/ .
 
+# Expose the app port
 EXPOSE 3000
 
+# Start the server
 CMD ["node", "server.js"]
