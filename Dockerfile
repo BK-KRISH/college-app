@@ -1,13 +1,16 @@
-# backend/Dockerfile
+# Dockerfile (in root folder)
 FROM node:18-alpine
 
 WORKDIR /app
-# copy package.json first to leverage cache
-COPY package*.json ./
+
+# Copy only backend files
+COPY backend/package*.json ./
+
 RUN npm install --production
 
-# copy the rest (server + public)
-COPY . .
+# Copy server and frontend files
+COPY backend/. .
 
 EXPOSE 3000
+
 CMD ["node", "server.js"]
